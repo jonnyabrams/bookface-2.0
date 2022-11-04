@@ -1,3 +1,11 @@
 .rightbar {
   flex: 3;
+  position: sticky;
+  top: 70px; // 50px navbar height plus 10px padding top and bottom
+  height: calc(100vh - 70px);
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
