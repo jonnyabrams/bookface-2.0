@@ -15,7 +15,7 @@ import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
 
 const App = () => {
-  const currentUser = false;
+  const currentUser = true;
 
   // make layout similar for Home & Profile
   const Layout = () => {
