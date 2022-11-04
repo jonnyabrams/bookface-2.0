@@ -1,4 +1,10 @@
-import { createBrowserRouter, RouterProvider, Route, Outlet } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Outlet,
+  Navigate,
+} from "react-router-dom";
 import Leftbar from "./components/leftbar/Leftbar";
 import Navbar from "./components/navbar/Navbar";
 import Rightbar from "./components/rightbar/Rightbar";
@@ -9,6 +15,9 @@ import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
 
 const App = () => {
+  const currentUser = false;
+
+  // make layout similar for Home & Profile
   const Layout = () => {
     return (
       <div>
@@ -22,20 +31,34 @@ const App = () => {
     );
   };
 
+  // redirect to login if trying to access Home or Profile with no user
+  const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
+    if (!currentUser) {
+      return <Navigate to="/login" />;
+    }
+
+    // if there is a user
+    return children;
+  };
+
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout />,
+      element: (
+        <ProtectedRoute>
+          <Layout />
+        </ProtectedRoute>
+      ),
       children: [
         {
           path: "/",
-          element: <Home />
+          element: <Home />,
         },
         {
           path: "/profile/:id",
-          element: <Profile />
+          element: <Profile />,
         },
-      ]
+      ],
     },
     {
       path: "/login",
