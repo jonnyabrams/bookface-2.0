@@ -1,15 +1,19 @@
 .leftbar {
   flex: 2;
-
-  hr {
-    margin: 20px 0px;
-    border: none;
-    height: 0.5px;
-    background-color: lightgray;
-  }
+  position: sticky;
+  top: 70px; // 50px navbar height plus 10px padding top and bottom
+  height: calc(100vh - 70px);
+  overflow: scroll;
 
   .container {
     padding: 20px;
+
+    hr {
+      margin: 20px 0px;
+      border: none;
+      height: 0.5px;
+      background-color: lightgray;
+    }
 
     .menu {
       display: flex;
