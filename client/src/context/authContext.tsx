@@ -18,7 +18,9 @@ export const AuthContextProvider = ({
     JSON.parse(localStorage.getItem("user") as string) || "null"
   );
 
-  const login = () => {};
+  const login = () => {
+    setCurrentUser({firstName: "Diego", lastName: "Diego", email: "diego@diego.com", password: "diego", id: 2})
+  };
 
   useEffect(() => {
     // stringify because you can't store object in localStorage
