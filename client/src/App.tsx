@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -13,16 +14,17 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
-import "./style.scss"
+import "./style.scss";
 
 const App = () => {
   const currentUser = true;
+  const [darkMode, setDarkMode] = useState(false);
 
   // make layout similar for Home & Profile
   const Layout = () => {
     return (
-      <div className="theme-dark">
-        <Navbar />
+      <div className={`theme-${darkMode ? "dark" : "light"}`}>
+        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
         <div style={{ display: "flex" }}>
           <Leftbar />
           <div style={{ flex: 6 }}>

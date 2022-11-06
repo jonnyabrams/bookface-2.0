@@ -10,7 +10,12 @@ import { Link } from "react-router-dom";
 
 import "./navbar.scss";
 
-const Navbar = () => {
+interface IProps {
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Navbar = ({ darkMode, setDarkMode }: IProps) => {
   return (
     <div className="navbar">
       <div className="left">
@@ -18,7 +23,7 @@ const Navbar = () => {
           <span>Bookface</span>
         </Link>
         <HomeOutlinedIcon />
-        <DarkModeOutlinedIcon />
+        <DarkModeOutlinedIcon onClick={() => setDarkMode(!darkMode)} />
         <GridViewOutlinedIcon />
         <div className="search">
           <SearchOutlinedIcon />
