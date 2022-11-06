@@ -9,6 +9,8 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { Link } from "react-router-dom";
 
 import "./navbar.scss";
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 
 interface IProps {
   darkMode: boolean;
@@ -16,6 +18,8 @@ interface IProps {
 }
 
 const Navbar = ({ darkMode, setDarkMode }: IProps) => {
+  const { currentUser } = useContext(AuthContext);
+
   return (
     <div className="navbar">
       <div className="left">
@@ -41,7 +45,7 @@ const Navbar = ({ darkMode, setDarkMode }: IProps) => {
         <NotificationsOutlinedIcon />
         <div className="user">
           <img src="/default-profile.jpeg" alt="" />
-          <span>Bobson Dugnutt</span>
+          <span>{`${currentUser.firstName} ${currentUser.lastName}`}</span>
         </div>
       </div>
     </div>

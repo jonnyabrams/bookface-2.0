@@ -15,11 +15,11 @@ export const AuthContextProvider = ({
 }) => {
   const [currentUser, setCurrentUser] = useState(
     // typecast returned value to string to stop it expecting string | null
-    JSON.parse(localStorage.getItem("user") as string) || "null"
+    JSON.parse(localStorage.getItem("user") as string) || null
   );
 
   const login = () => {
-    setCurrentUser({firstName: "Diego", lastName: "Diego", email: "diego@diego.com", password: "diego", id: 2})
+    setCurrentUser({firstName: "Diego", lastName: "Abrams", email: "diego@diego.com", password: "diego", id: 2})
   };
 
   useEffect(() => {
