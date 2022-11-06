@@ -23,7 +23,11 @@ const Navbar = ({ darkMode, setDarkMode }: IProps) => {
           <span>Bookface</span>
         </Link>
         <HomeOutlinedIcon />
-        <DarkModeOutlinedIcon onClick={() => setDarkMode(!darkMode)} />
+        {darkMode ? (
+          <WbSunnyOutlinedIcon onClick={() => setDarkMode(!darkMode)} />
+        ) : (
+          <DarkModeOutlinedIcon onClick={() => setDarkMode(!darkMode)} />
+        )}
         <GridViewOutlinedIcon />
         <div className="search">
           <SearchOutlinedIcon />
