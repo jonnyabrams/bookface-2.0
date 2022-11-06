@@ -13,6 +13,7 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
+import "./style.scss"
 
 const App = () => {
   const currentUser = true;
@@ -20,7 +21,7 @@ const App = () => {
   // make layout similar for Home & Profile
   const Layout = () => {
     return (
-      <div>
+      <div className="theme-dark">
         <Navbar />
         <div style={{ display: "flex" }}>
           <Leftbar />
