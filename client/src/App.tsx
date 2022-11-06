@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -6,18 +6,19 @@ import {
   Outlet,
   Navigate,
 } from "react-router-dom";
+
 import Leftbar from "./components/leftbar/Leftbar";
 import Navbar from "./components/navbar/Navbar";
 import Rightbar from "./components/rightbar/Rightbar";
+import { AuthContext } from "./context/authContext";
 import Home from "./pages/home/Home";
-
 import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
 import "./style.scss";
 
 const App = () => {
-  const currentUser = true;
+  const { currentUser } = useContext(AuthContext);
   const [darkMode, setDarkMode] = useState(false);
 
   // make layout similar for Home & Profile
