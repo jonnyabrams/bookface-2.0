@@ -7,12 +7,16 @@ import { Link } from "react-router-dom";
 
 import { PostType } from "../../typings";
 import "./post.scss";
+import Comments from "../comments/Comments";
+import { useState } from "react";
 
 interface IProps {
   post: PostType;
 }
 
 const Post = ({ post }: IProps) => {
+  const [commentsOpen, setCommentsOpen] = useState(false)
+
   //temporary
   const liked = false;
 
@@ -45,7 +49,7 @@ const Post = ({ post }: IProps) => {
             {liked ? <FavoriteOutlinedIcon /> : <FavoriteBorderOutlinedIcon />}
             12 Likes
           </div>
-          <div className="item">
+          <div className="item" onClick={() => setCommentsOpen(!commentsOpen)}>
             <TextsmsOutlinedIcon />
             10 Comments
           </div>
@@ -53,6 +57,7 @@ const Post = ({ post }: IProps) => {
             <ShareOutlinedIcon />
           </div>
         </div>
+        {commentsOpen && <Comments />}
       </div>
     </div>
   );
