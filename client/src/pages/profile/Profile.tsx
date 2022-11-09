@@ -38,9 +38,6 @@ const Profile = () => {
             <a href="http://facebook.com">
               <LinkedInIcon fontSize="large" />
             </a>
-            <a href="http://facebook.com">
-              <PinterestIcon fontSize="large" />
-            </a>
           </div>
           <div className="center">
             <span>Bobson Dugnutt</span>
