@@ -38,6 +38,9 @@ const Profile = () => {
             <a href="http://facebook.com">
               <LinkedInIcon fontSize="large" />
             </a>
+            <a href="http://facebook.com">
+              <PinterestIcon fontSize="large" />
+            </a>
           </div>
           <div className="center">
             <span>Bobson Dugnutt</span>
@@ -51,7 +54,7 @@ const Profile = () => {
                 <span>bobs.on</span>
               </div>
             </div>
-            <button>follow</button>
+            <button>Follow</button>
           </div>
           <div className="right">
             <EmailOutlinedIcon />
