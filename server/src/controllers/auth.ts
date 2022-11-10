@@ -8,9 +8,9 @@ export const register = async (req: Request, res: Response) => {
 
   try {
     // check if user exists
-    const user = await db.query("SELECT FROM users WHERE email = $1", [email]);
+    const user = await db.query("SELECT * FROM users WHERE email = $1", [email]);
 
-    if (user.rows[0]) {res.status(409).json("User already exists");}
+    if (user.rows[0]) return res.status(409).json("User already exists");
 
     // hash password
     const salt = bcrypt.genSaltSync(10);
