@@ -1,3 +1,5 @@
+@import "../../style.scss";
+
 .register {
   height: 100vh;
   background-color: rgb(193, 190, 255);
@@ -24,6 +26,14 @@
       flex-direction: column;
       gap: 30px;
       color: white;
+
+      @include mobile {
+        display: none;
+      }
+
+      @include tablet {
+        display: none;
+      }
       
       h1 {
         font-size: 100px;
@@ -76,6 +86,7 @@
           border: none;
           border-bottom: 1px solid lightgray;
           padding: 20px 10px;
+          outline: none;
         }
         button {
           width: 50%;

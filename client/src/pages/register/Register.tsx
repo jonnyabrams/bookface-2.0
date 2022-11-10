@@ -1,7 +1,40 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 import "./register.scss";
 
 const Register = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
+
+  const [err, setErr] = useState(null);
+
+  const handleClick = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setPasswordsMatch(false);
+    } else {
+      const newUser = {
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        password,
+        username: firstName.toLowerCase() + lastName.toLowerCase(),
+      };
+      try {
+        await axios.post("http://localhost:8000/api/auth/register", newUser);
+        console.log(newUser)
+      } catch (error: any) {
+        setErr(error.response.data);
+      }
+    }
+  };
   return (
     <div className="register">
       <div className="card">
@@ -22,12 +55,44 @@ const Register = () => {
         <div className="right">
           <h1>Register</h1>
           <form>
-            <input type="text" placeholder="First name" />
-            <input type="text" placeholder="Last name" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <input type="password" placeholder="Confirm password" />
-            <button>Register</button>
+            <input
+              type="text"
+              placeholder="First name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Last name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Confirm password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+
+            {!passwordsMatch && (
+              <span style={{ color: "red", fontSize: "10px" }}>
+                * Passwords do not match
+              </span>
+            )}
+            {err && err}
+            <button onClick={handleClick}>Register</button>
           </form>
         </div>
       </div>
