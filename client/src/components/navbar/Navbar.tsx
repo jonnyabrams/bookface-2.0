@@ -1,12 +1,12 @@
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
-import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
+import LogoutIcon from "@mui/icons-material/Logout";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./navbar.scss";
 import { useContext } from "react";
@@ -18,7 +18,8 @@ interface IProps {
 }
 
 const Navbar = ({ darkMode, setDarkMode }: IProps) => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   return (
     <div className="navbar">
@@ -26,13 +27,22 @@ const Navbar = ({ darkMode, setDarkMode }: IProps) => {
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
           <span>Bookface</span>
         </Link>
-        <HomeOutlinedIcon />
+        <HomeOutlinedIcon
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/")}
+        />
         {darkMode ? (
-          <WbSunnyOutlinedIcon onClick={() => setDarkMode(!darkMode)} />
+          <WbSunnyOutlinedIcon
+            style={{ cursor: "pointer" }}
+            onClick={() => setDarkMode(!darkMode)}
+          />
         ) : (
-          <DarkModeOutlinedIcon onClick={() => setDarkMode(!darkMode)} />
+          <DarkModeOutlinedIcon
+            style={{ cursor: "pointer" }}
+            onClick={() => setDarkMode(!darkMode)}
+          />
         )}
-        <GridViewOutlinedIcon />
+        <LogoutIcon style={{ cursor: "pointer" }} onClick={() => logout()} />
         <div className="search">
           <SearchOutlinedIcon />
           <input type="text" placeholder="Search..." />

@@ -5,6 +5,7 @@ import { ILogin, UserType } from "../typings";
 interface IAuthContext {
   currentUser: UserType;
   login: (inputs: ILogin) => Promise<void>;
+  logout: () => void;
 }
 
 export const AuthContext = createContext({} as IAuthContext);
@@ -24,7 +25,12 @@ export const AuthContextProvider = ({
       withCredentials: true,
     });
 
-    setCurrentUser(res.data)
+    setCurrentUser(res.data);
+  };
+
+  const logout = () => {
+    axios.post("/auth/logout");
+    setCurrentUser(null);
   };
 
   useEffect(() => {
@@ -34,7 +40,7 @@ export const AuthContextProvider = ({
 
   return (
     // will be "cannot find namespace" error here unless you give this file a .tsx extension
-    <AuthContext.Provider value={{ login, currentUser }}>
+    <AuthContext.Provider value={{ login, logout, currentUser }}>
       {children}
     </AuthContext.Provider>
   );
