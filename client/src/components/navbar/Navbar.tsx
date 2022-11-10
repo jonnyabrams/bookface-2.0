@@ -45,7 +45,7 @@ const Navbar = ({ darkMode, setDarkMode }: IProps) => {
         <NotificationsOutlinedIcon />
         <div className="user">
           <img src="/default-profile.jpeg" alt="" />
-          <span>{`${currentUser.firstName} ${currentUser.lastName}`}</span>
+          <span>{`${currentUser.first_name} ${currentUser.last_name}`}</span>
         </div>
       </div>
     </div>

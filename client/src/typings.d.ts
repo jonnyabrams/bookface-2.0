@@ -1,6 +1,6 @@
 export type UserType = {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
   id: number;
@@ -14,3 +14,8 @@ export type PostType = {
   img?: string;
   desc: string;
 };
+
+export interface ILogin {
+  email: string;
+  password: string;
+}

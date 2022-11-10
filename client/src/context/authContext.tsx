@@ -1,9 +1,10 @@
+import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-import { UserType } from "../typings";
+import { ILogin, UserType } from "../typings";
 
 interface IAuthContext {
   currentUser: UserType;
-  login: () => void;
+  login: (inputs: ILogin) => Promise<void>;
 }
 
 export const AuthContext = createContext({} as IAuthContext);
@@ -18,8 +19,12 @@ export const AuthContextProvider = ({
     JSON.parse(localStorage.getItem("user") as string) || null
   );
 
-  const login = () => {
-    setCurrentUser({firstName: "Diego", lastName: "Abrams", email: "diego@diego.com", password: "diego", id: 2})
+  const login = async (inputs: ILogin) => {
+    const res = await axios.post("/auth/login", inputs, {
+      withCredentials: true,
+    });
+
+    setCurrentUser(res.data)
   };
 
   useEffect(() => {
@@ -29,6 +34,8 @@ export const AuthContextProvider = ({
 
   return (
     // will be "cannot find namespace" error here unless you give this file a .tsx extension
-    <AuthContext.Provider value={{ login, currentUser }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ login, currentUser }}>
+      {children}
+    </AuthContext.Provider>
   );
 };

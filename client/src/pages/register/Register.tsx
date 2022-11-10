@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import "./register.scss";
@@ -13,6 +13,8 @@ const Register = () => {
   const [passwordsMatch, setPasswordsMatch] = useState(true);
 
   const [err, setErr] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleClick = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -28,8 +30,8 @@ const Register = () => {
         username: firstName.toLowerCase() + lastName.toLowerCase(),
       };
       try {
-        await axios.post("http://localhost:8000/api/auth/register", newUser);
-        console.log(newUser)
+        await axios.post("/auth/register", newUser);
+        navigate("/login");
       } catch (error: any) {
         setErr(error.response.data);
       }
