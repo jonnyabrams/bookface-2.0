@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -21,19 +22,23 @@ const App = () => {
   const { currentUser } = useContext(AuthContext);
   const [darkMode, setDarkMode] = useState(false);
 
+  const queryClient = new QueryClient();
+
   // make layout similar for Home & Profile
   const Layout = () => {
     return (
-      <div className={`theme-${darkMode ? "dark" : "light"}`}>
-        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
-        <div style={{ display: "flex" }}>
-          <Leftbar />
-          <div style={{ flex: 6 }}>
-            <Outlet />
+      <QueryClientProvider client={queryClient}>
+        <div className={`theme-${darkMode ? "dark" : "light"}`}>
+          <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+          <div style={{ display: "flex" }}>
+            <Leftbar />
+            <div style={{ flex: 6 }}>
+              <Outlet />
+            </div>
+            <Rightbar />
           </div>
-          <Rightbar />
         </div>
-      </div>
+      </QueryClientProvider>
     );
   };
 
