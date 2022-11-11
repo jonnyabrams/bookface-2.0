@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/authContext";
 import "./login.scss";
 
 const Login = () => {
-  const { login } = useContext(AuthContext);
+  const { login, currentUser } = useContext(AuthContext);
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -13,6 +13,13 @@ const Login = () => {
   const [err, setErr] = useState(null);
 
   const navigate = useNavigate();
+
+  // solve issue of having to click login button twice
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/");
+    }
+  }, [currentUser]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -22,7 +29,6 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(inputs);
-      navigate("/");
     } catch (error: any) {
       setErr(error.response.data);
     }
