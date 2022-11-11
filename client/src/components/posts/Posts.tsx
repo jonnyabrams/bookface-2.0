@@ -12,13 +12,17 @@ const Posts = () => {
     })
   );
 
-  console.log(data?.rows)
+  console.log(data?.rows);
 
   return (
     <div className="posts">
-      {data?.rows.map((post: PostType) => (
-        <Post post={post} key={post.id} />
-      ))}
+      {error
+        ? "Something went wrong"
+        : isLoading
+        ? "Loading..."
+        : data?.rows.map((post: PostType) => (
+            <Post post={post} key={post.id} />
+          ))}
     </div>
   );
 };
