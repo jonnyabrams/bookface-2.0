@@ -25,13 +25,13 @@ const Post = ({ post }: IProps) => {
       <div className="container">
         <div className="user">
           <div className="user-info">
-            <img src={post.profilePic} alt="" />
+            <img src={post.profile_pic ? post.profile_pic : "/default-profile.jpeg"} alt="" />
             <div className="details">
               <Link
-                to={`/profile/${post.userId}`}
+                to={`/profile/${post.user_id}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <span className="name">{post.name}</span>
+                <span className="name">{`${post.first_name} ${post.last_name}`}</span>
               </Link>
               <span className="date">1 min ago</span>
             </div>
@@ -40,7 +40,7 @@ const Post = ({ post }: IProps) => {
         </div>
 
         <div className="content">
-          <p>{post.desc}</p>
+          <p>{post.content}</p>
           <img src={post.img} alt="" />
         </div>
 

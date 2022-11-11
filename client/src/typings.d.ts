@@ -8,11 +8,12 @@ export type UserType = {
 
 export type PostType = {
   id: number;
-  name: string;
-  userId: number;
-  profilePic: string;
+  first_name: string;
+  last_name: string;
+  user_id: number;
+  profile_pic?: string;
   img?: string;
-  desc: string;
+  content: string;
 };
 
 export interface ILogin {

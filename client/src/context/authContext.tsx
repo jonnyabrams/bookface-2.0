@@ -21,7 +21,7 @@ export const AuthContextProvider = ({
   );
 
   const login = async (inputs: ILogin) => {
-    const res = await axios.post("/auth/login", inputs, {
+    const res = await axios.post("http://localhost:8000/api/auth/login", inputs, {
       withCredentials: true,
     });
 
@@ -29,7 +29,7 @@ export const AuthContextProvider = ({
   };
 
   const logout = () => {
-    axios.post("/auth/logout");
+    axios.post("http://localhost:8000/api/auth/logout");
     setCurrentUser(null);
   };
 

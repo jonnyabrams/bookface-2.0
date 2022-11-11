@@ -30,7 +30,7 @@ const Register = () => {
         username: firstName.toLowerCase() + lastName.toLowerCase(),
       };
       try {
-        await axios.post("/auth/register", newUser);
+        await axios.post("http://localhost:8000/api/auth/register", newUser);
         navigate("/login");
       } catch (error: any) {
         setErr(error.response.data);
