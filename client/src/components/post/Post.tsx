@@ -28,8 +28,6 @@ const Post = ({ post }: IProps) => {
     })
   );
 
-  console.log(data)
-
   const queryClient = useQueryClient();
 
   const mutation = useMutation(

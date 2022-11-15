@@ -15,6 +15,13 @@ export const register = async (req: Request, res: Response) => {
 
     if (user.rows[0]) return res.status(409).json("User already exists");
 
+    // check if username exists
+    const username_exists = await db.query("SELECT * FROM users WHERE username = $1", [
+      username,
+    ]);
+
+    const db_username = username_exists.rows[0] ? username + Math.floor(Math.random() * 10000) : username
+
     // hash password
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(req.body.password, salt);
@@ -22,7 +29,7 @@ export const register = async (req: Request, res: Response) => {
     // create new user in db
     const newUser = await db.query(
       "INSERT INTO users (first_name, last_name, email, password, username) values ($1, $2, $3, $4, $5) returning *",
-      [first_name, last_name, email, hashedPassword, username]
+      [first_name, last_name, email, hashedPassword, db_username]
     );
 
     // isolate password to remove it from returned data
