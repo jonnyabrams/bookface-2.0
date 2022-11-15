@@ -101,7 +101,7 @@ const Post = ({ post }: IProps) => {
           </div>
           <div className="item" onClick={() => setCommentsOpen(!commentsOpen)}>
             <TextsmsOutlinedIcon />
-            10 Comments
+            See Comments
           </div>
           <div className="item">
             <ShareOutlinedIcon />
