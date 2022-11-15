@@ -52,8 +52,8 @@ const Comments = ({ postId }: { postId: number }) => {
       </div>
       {isLoading
         ? "Loading..."
-        : data.rows.map((comment: CommentType) => (
-            <div className="comment" key={comment.id}>
+        : data.rows.map((comment: CommentType, index: number) => (
+            <div className="comment" key={index}>
               <img
                 src={
                   comment.profile_pic

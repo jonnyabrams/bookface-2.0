@@ -18,8 +18,8 @@ const Posts = () => {
         ? "Something went wrong"
         : isLoading
         ? "Loading..."
-        : data?.rows.map((post: PostType) => (
-            <Post post={post} key={post.id} />
+        : data?.rows.map((post: PostType, index: number) => (
+            <Post post={post} key={index} />
           ))}
     </div>
   );

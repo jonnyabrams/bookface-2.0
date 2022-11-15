@@ -36,8 +36,8 @@ const Stories = () => {
           <span>{`${currentUser.first_name} ${currentUser.last_name}`}</span>
           <button>+</button>
         </div>
-      {stories.map((story) => (
-        <div className="story" key={story.id}>
+      {stories.map((story, index) => (
+        <div className="story" key={index}>
           <img src={story.img} alt="" />
           <span>{story.name}</span>
         </div>
