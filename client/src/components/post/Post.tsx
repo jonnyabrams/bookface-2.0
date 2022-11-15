@@ -4,6 +4,7 @@ import TextsmsOutlinedIcon from "@mui/icons-material/TextsmsOutlined";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Link } from "react-router-dom";
+import TimeAgo from "react-timeago";
 
 import { PostType } from "../../typings";
 import "./post.scss";
@@ -15,7 +16,7 @@ interface IProps {
 }
 
 const Post = ({ post }: IProps) => {
-  const [commentsOpen, setCommentsOpen] = useState(false)
+  const [commentsOpen, setCommentsOpen] = useState(false);
 
   //temporary
   const liked = false;
@@ -25,7 +26,12 @@ const Post = ({ post }: IProps) => {
       <div className="container">
         <div className="user">
           <div className="user-info">
-            <img src={post.profile_pic ? post.profile_pic : "/default-profile.jpeg"} alt="" />
+            <img
+              src={
+                post.profile_pic ? post.profile_pic : "/default-profile.jpeg"
+              }
+              alt=""
+            />
             <div className="details">
               <Link
                 to={`/profile/${post.user_id}`}
@@ -33,7 +39,9 @@ const Post = ({ post }: IProps) => {
               >
                 <span className="name">{`${post.first_name} ${post.last_name}`}</span>
               </Link>
-              <span className="date">1 min ago</span>
+              <span className="date">
+                <TimeAgo date={post.created_at} />
+              </span>
             </div>
           </div>
           <MoreHorizIcon />

@@ -15,6 +15,7 @@ export type PostType = {
   profile_pic?: string;
   img?: string;
   content: string;
+  created_at: Date;
 };
 
 export interface ILogin {
