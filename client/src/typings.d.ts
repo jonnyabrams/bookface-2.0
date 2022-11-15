@@ -18,6 +18,17 @@ export type PostType = {
   created_at: Date;
 };
 
+export type CommentType = {
+  id: number;
+  content: string;
+  created_at: Date;
+  user_id: number;
+  post_id: number;
+  first_name: string;
+  last_name: string;
+  profile_pic: string;
+};
+
 export interface ILogin {
   email: string;
   password: string;

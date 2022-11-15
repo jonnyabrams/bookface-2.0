@@ -9,6 +9,7 @@ import Friend from "../../assets/friend.png";
 import "./share.scss";
 
 const Share = () => {
+  const { currentUser } = useContext(AuthContext);
   const [file, setFile] = useState<File | null>(null);
   const [content, setContent] = useState("");
 
@@ -23,8 +24,6 @@ const Share = () => {
       console.log(error);
     }
   };
-
-  const { currentUser } = useContext(AuthContext);
 
   const queryClient = useQueryClient();
 
@@ -45,7 +44,7 @@ const Share = () => {
     let imgUrl = "";
     if (file) imgUrl = await upload();
     // @ts-ignore
-    mutation.mutate({ content, user_id: 13, img: imgUrl });
+    mutation.mutate({ content, img: imgUrl });
     setContent("");
     setFile(null);
   };

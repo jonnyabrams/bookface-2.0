@@ -65,7 +65,7 @@ const Post = ({ post }: IProps) => {
             <ShareOutlinedIcon />
           </div>
         </div>
-        {commentsOpen && <Comments />}
+        {commentsOpen && <Comments postId={post.id} />}
       </div>
     </div>
   );
