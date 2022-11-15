@@ -45,7 +45,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
-app.use("/api/like", likeRoutes);
+app.use("/api/likes", likeRoutes);
 
 const port = 8000;
 

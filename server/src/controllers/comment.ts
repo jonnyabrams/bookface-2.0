@@ -6,7 +6,6 @@ import db from "../connect";
 export const getComments = async (req: Request, res: Response) => {
   try {
     const comments = await db.query(
-      // returns all user's posts + posts of those they follow
       `SELECT c.*, u.id AS user_id, first_name, last_name, profile_pic FROM comments AS c JOIN users AS u ON (u.id = c.user_id)
       WHERE c.post_id = $1
       ORDER BY c.created_at DESC`,
