@@ -67,6 +67,12 @@ const Share = () => {
               onChange={(e) => setContent(e.target.value)}
             />
           </div>
+          <div className="right">
+            {/* create fake url to show img preview */}
+            {file && (
+              <img className="file" alt="" src={URL.createObjectURL(file)} />
+            )}
+          </div>
         </div>
         <hr />
         <div className="bottom">
