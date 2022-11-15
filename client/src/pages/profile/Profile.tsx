@@ -56,7 +56,7 @@ const Profile = () => {
             <div className="info">
               <div className="item">
                 <PlaceIcon />
-                <span>UK</span>
+                <span>{data?.city ? data?.city : "Earth"}</span>
               </div>
               <div className="item">
                 <LanguageIcon />
