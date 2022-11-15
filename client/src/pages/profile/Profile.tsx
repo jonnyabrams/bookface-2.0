@@ -7,12 +7,15 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
+import { useContext } from "react";
 
 import "./profile.scss";
 import Posts from "../../components/posts/Posts";
 import { makeRequest } from "../../axios";
+import { AuthContext } from "../../context/authContext";
 
 const Profile = () => {
+  const { currentUser } = useContext(AuthContext);
   const username = useLocation().pathname.split("/")[2];
 
   const { isLoading, error, data } = useQuery(["user"], () =>
@@ -25,12 +28,12 @@ const Profile = () => {
     <div className="profile">
       <div className="images">
         <img
-          src="https://images.pexels.com/photos/13440765/pexels-photo-13440765.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          src={data?.cover_pic ? data?.cover_pic : "/default-cover.jpeg"}
           alt=""
           className="cover-pic"
         />
         <img
-          src="https://images.pexels.com/photos/14028501/pexels-photo-14028501.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+          src={data?.profile_pic ? data?.profile_pic : "/default-profile.jpeg"}
           alt=""
           className="profile-pic"
         />
@@ -41,15 +44,15 @@ const Profile = () => {
             <a href="http://facebook.com">
               <InstagramIcon fontSize="large" />
             </a>
-            <a href="http://facebook.com">
+            <a href="https://twitter.com/">
               <TwitterIcon fontSize="large" />
             </a>
-            <a href="http://facebook.com">
+            <a href="https://linkedin.com">
               <LinkedInIcon fontSize="large" />
             </a>
           </div>
           <div className="center">
-            <span>Bobson Dugnutt</span>
+            <span>{data?.first_name} {data?.last_name}</span>
             <div className="info">
               <div className="item">
                 <PlaceIcon />
@@ -57,10 +60,10 @@ const Profile = () => {
               </div>
               <div className="item">
                 <LanguageIcon />
-                <span>bobs.on</span>
+                <span>{data?.website ? data?.website : "bookface.com"}</span>
               </div>
             </div>
-            <button>Follow</button>
+            {currentUser?.username !== data.username && <button>Follow</button>}
           </div>
           <div className="right">
             <EmailOutlinedIcon />
