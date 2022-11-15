@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import db from "../connect";
 
 export const register = async (req: Request, res: Response) => {
-  const { email, first_name, last_name } = req.body;
+  const { email, first_name, last_name, username } = req.body;
 
   try {
     // check if user exists
@@ -21,8 +21,8 @@ export const register = async (req: Request, res: Response) => {
 
     // create new user in db
     const newUser = await db.query(
-      "INSERT INTO users (first_name, last_name, email, password) values ($1, $2, $3, $4) returning *",
-      [first_name, last_name, email, hashedPassword]
+      "INSERT INTO users (first_name, last_name, email, password, username) values ($1, $2, $3, $4, $5) returning *",
+      [first_name, last_name, email, hashedPassword, username]
     );
 
     // isolate password to remove it from returned data

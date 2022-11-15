@@ -1,17 +1,23 @@
-import FacebookTwoToneIcon from "@mui/icons-material/FacebookTwoTone";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import PinterestIcon from "@mui/icons-material/Pinterest";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import PlaceIcon from "@mui/icons-material/Place";
 import LanguageIcon from "@mui/icons-material/Language";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { useQuery } from "@tanstack/react-query";
 
 import "./profile.scss";
 import Posts from "../../components/posts/Posts";
+import { makeRequest } from "../../axios";
 
 const Profile = () => {
+  // const { isLoading, error, data } = useQuery(["user"], () =>
+  //   makeRequest.get("/users/find" + userId).then((res) => {
+  //     return res.data;
+  //   })
+  // );
+
   return (
     <div className="profile">
       <div className="images">
