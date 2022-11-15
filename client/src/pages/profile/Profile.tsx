@@ -6,17 +6,20 @@ import LanguageIcon from "@mui/icons-material/Language";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "react-router-dom";
 
 import "./profile.scss";
 import Posts from "../../components/posts/Posts";
 import { makeRequest } from "../../axios";
 
 const Profile = () => {
-  // const { isLoading, error, data } = useQuery(["user"], () =>
-  //   makeRequest.get("/users/find" + userId).then((res) => {
-  //     return res.data;
-  //   })
-  // );
+  const username = useLocation().pathname.split("/")[2];
+
+  const { isLoading, error, data } = useQuery(["user"], () =>
+    makeRequest.get("/users/find/" + username).then((res) => {
+      return res.data;
+    })
+  );
 
   return (
     <div className="profile">
