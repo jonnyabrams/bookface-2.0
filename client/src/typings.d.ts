@@ -4,6 +4,7 @@ export type UserType = {
   email: string;
   password: string;
   id: number;
+  profile_pic?: string;
 };
 
 export type PostType = {

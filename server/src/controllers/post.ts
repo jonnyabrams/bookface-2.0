@@ -37,7 +37,7 @@ export const addPost = async (req: Request, res: Response) => {
 
   try {
     const post = await db.query(
-      "INSERT INTO posts (content, img, user_id) values ($1, $2, $3) returning *",
+      "INSERT INTO posts (content, img, user_id) VALUES ($1, $2, $3) returning *",
       [content, img, user_id]
     );
 
