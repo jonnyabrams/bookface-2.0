@@ -52,7 +52,9 @@ const Profile = () => {
             </a>
           </div>
           <div className="center">
-            <span>{data?.first_name} {data?.last_name}</span>
+            <span>
+              {data?.first_name} {data?.last_name}
+            </span>
             <div className="info">
               <div className="item">
                 <PlaceIcon />
@@ -63,7 +65,11 @@ const Profile = () => {
                 <span>{data?.website ? data?.website : "bookface.com"}</span>
               </div>
             </div>
-            {currentUser?.username !== data.username && <button>Follow</button>}
+            {currentUser?.username === data.username ? (
+              <button>Update</button>
+            ) : (
+              <button>Follow</button>
+            )}
           </div>
           <div className="right">
             <EmailOutlinedIcon />
