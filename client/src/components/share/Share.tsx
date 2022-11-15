@@ -46,6 +46,8 @@ const Share = () => {
     if (file) imgUrl = await upload();
     // @ts-ignore
     mutation.mutate({ content, user_id: 13, img: imgUrl });
+    setContent("");
+    setFile(null);
   };
 
   return (
@@ -65,6 +67,7 @@ const Share = () => {
               type="text"
               placeholder={`What's on your mind, ${currentUser.first_name}?`}
               onChange={(e) => setContent(e.target.value)}
+              value={content}
             />
           </div>
           <div className="right">
