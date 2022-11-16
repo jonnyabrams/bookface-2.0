@@ -17,9 +17,9 @@ export const getPosts = async (req: Request, res: Response) => {
       const posts = await db.query(
         // returns all user's posts + posts of those they follow
         `SELECT p.*, u.id AS user_id, first_name, last_name, profile_pic FROM posts AS p JOIN users AS u ON (u.id = p.user_id)
-        LEFT JOIN follows AS f ON (p.user_id = f.followed_user_id) WHERE f.follower_user_id = $1 OR p.user_id = $1
+        LEFT JOIN follows AS f ON (p.username = f.followed_username) WHERE f.follower_username = $1 OR p.username = $1
         ORDER BY p.created_at DESC`,
-        [userInfo.id]
+        [userInfo.username]
       );
 
       res.status(200).json(posts);
@@ -40,8 +40,8 @@ export const addPost = async (req: Request, res: Response) => {
 
     try {
       const post = await db.query(
-        "INSERT INTO posts (content, img, user_id) VALUES ($1, $2, $3) returning *",
-        [content, img, userInfo.id]
+        "INSERT INTO posts (content, img, user_id, username) VALUES ($1, $2, $3, $4) returning *",
+        [content, img, userInfo.id, userInfo.username]
       );
 
       res.status(201).json(post.rows[0]);

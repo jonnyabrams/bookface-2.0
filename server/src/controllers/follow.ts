@@ -6,12 +6,14 @@ import db from "../connect";
 export const getFollows = async (req: Request, res: Response) => {
   try {
     const follows = await db.query(
-      "SELECT follower_user_id from follows WHERE followed_user_id = $1",
-      [req.query.followedUserId]
+      "SELECT follower_username FROM follows WHERE followed_username = $1",
+      [req.query.followedUsername]
     );
 
-    // return just the user ids
-    res.status(200).json(follows.rows.map((follow) => follow.follower_user_id));
+    console.log(follows)
+
+    // return just the usernames
+    res.status(200).json(follows.rows.map((follow) => follow.follower_username));
   } catch (error) {
     res.status(500).json(error);
     console.log(error);
@@ -27,8 +29,8 @@ export const addFollow = async (req: Request, res: Response) => {
 
     try {
       await db.query(
-        "INSERT INTO follows (follower_user_id, followed_user_id) VALUES ($1, $2) returning *",
-        [userInfo.id, req.body.userId]
+        "INSERT INTO follows (follower_username, followed_username) VALUES ($1, $2) returning *",
+        [userInfo.username, req.body.username]
       );
 
       res.status(201).json("User followed successfully");
@@ -48,8 +50,8 @@ export const deleteFollow = async (req: Request, res: Response) => {
 
     try {
       await db.query(
-        "DELETE FROM follows WHERE follower_user_id = $1 AND followed_user_id = $2",
-        [userInfo.id, req.query.userId]
+        "DELETE FROM follows WHERE follower_username = $1 AND followed_username = $2",
+        [userInfo.username, req.query.username]
       );
 
       res.status(201).json("User unfollowed successfully");

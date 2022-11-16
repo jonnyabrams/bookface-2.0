@@ -20,7 +20,7 @@ export const register = async (req: Request, res: Response) => {
       username,
     ]);
 
-    const db_username = username_exists.rows[0] ? username + Math.floor(Math.random() * 10000) : username
+    const db_username = username_exists.rows[0] ? username + Math.floor(Math.random() * 10000) + Math.floor(Math.random() * 10000) : username
 
     // hash password
     const salt = bcrypt.genSaltSync(10);
@@ -62,7 +62,7 @@ export const login = async (req: Request, res: Response) => {
     if (!checkPassword) return res.status(400).json("Wrong credentials");
 
     // generate token
-    const token = jwt.sign({ id: user.rows[0].id }, "secretkey");
+    const token = jwt.sign({ id: user.rows[0].id, username: user.rows[0].username }, "secretkey");
 
     // destructure out password
     const { password, ...others } = user.rows[0];

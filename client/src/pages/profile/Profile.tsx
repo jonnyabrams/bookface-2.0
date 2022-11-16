@@ -21,7 +21,7 @@ const Profile = () => {
   const { isLoading, error, data } = useQuery(["user"], () =>
     makeRequest.get("/users/find/" + username).then((res) => {
       return res.data;
-    })
+    })  
   );
 
   const {
@@ -29,22 +29,22 @@ const Profile = () => {
     error: followsError,
     data: followData,
   } = useQuery(["follow"], () =>
-    makeRequest.get("/follows?followedUserId=" + data?.id).then((res) => {
+    makeRequest.get("/follows?followedUsername=" + username).then((res) => {
       return res.data;
     })
   );
 
-  console.log(followData);
+  console.log(followData)
 
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
     (following) => {
       // @ts-ignore
-      if (following) return makeRequest.delete("/follows?userId=" + data?.id);
+      if (following) return makeRequest.delete("/follows?username=" + username);
       // if not liked...
       // @ts-ignore
-      return makeRequest.post("/follows", { userId: data?.id });
+      return makeRequest.post("/follows", { username });
     },
     {
       onSuccess: () => {
@@ -55,7 +55,7 @@ const Profile = () => {
   );
 
   const handleFollow = () => {
-    mutation.mutate(followData?.includes(currentUser.id));
+    mutation.mutate(followData?.includes(currentUser.username));
   };
 
   return (
@@ -107,13 +107,13 @@ const Profile = () => {
                     </span>
                   </div>
                 </div>
-                {followsLoading ? (
+                {followsError ? (
                   "Loading..."
-                ) : currentUser?.username === data.username ? (
+                ) : currentUser?.username === username ? (
                   <button>Update</button>
                 ) : (
                   <button onClick={handleFollow}>
-                    {followData?.includes(currentUser.id)
+                    {followData?.includes(currentUser.username)
                       ? "Following"
                       : "Follow"}
                   </button>
