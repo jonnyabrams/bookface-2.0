@@ -10,8 +10,6 @@ export const getFollows = async (req: Request, res: Response) => {
       [req.query.followedUsername]
     );
 
-    console.log(follows)
-
     // return just the usernames
     res.status(200).json(follows.rows.map((follow) => follow.follower_username));
   } catch (error) {

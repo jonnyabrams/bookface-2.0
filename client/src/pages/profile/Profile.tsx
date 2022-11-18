@@ -34,8 +34,6 @@ const Profile = () => {
     })
   );
 
-  console.log(followData)
-
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
@@ -126,7 +124,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="posts"></div>
-          <Posts />
+          <Posts username={username} />
         </>
       )}
     </div>

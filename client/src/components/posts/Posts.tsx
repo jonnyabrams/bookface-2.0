@@ -5,9 +5,9 @@ import { PostType } from "../../typings";
 import Post from "../post/Post";
 import "./posts.scss";
 
-const Posts = () => {
+const Posts = ({ username }: { username: string }) => {
   const { isLoading, error, data } = useQuery(["posts"], () =>
-    makeRequest.get("/posts").then((res) => {
+    makeRequest.get("/posts?username=" + username).then((res) => {
       return res.data;
     })
   );
