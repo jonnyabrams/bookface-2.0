@@ -57,7 +57,7 @@ const Comments = ({ postId }: { postId: number }) => {
               <img
                 src={
                   comment.profile_pic
-                    ? comment.profile_pic
+                    ? `/upload/${comment.profile_pic}`
                     : "/default-profile.jpeg"
                 }
                 alt=""
