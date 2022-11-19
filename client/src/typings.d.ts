@@ -5,7 +5,10 @@ export type UserType = {
   password: string;
   id: number;
   profile_pic?: string;
+  cover_pic?: string;
   username: string;
+  city?: string;
+  website?: string;
 };
 
 export type PostType = {
@@ -17,6 +20,7 @@ export type PostType = {
   img?: string;
   content: string;
   created_at: Date;
+  username: string;
 };
 
 export type CommentType = {

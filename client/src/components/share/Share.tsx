@@ -57,7 +57,7 @@ const Share = () => {
             <img
               src={
                 currentUser.profile_pic
-                  ? currentUser.profile_pic
+                  ? `upload/${currentUser.profile_pic}`
                   : "/default-profile.jpeg"
               }
               alt=""

@@ -7,21 +7,23 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import "./profile.scss";
 import Posts from "../../components/posts/Posts";
 import { makeRequest } from "../../axios";
 import { AuthContext } from "../../context/authContext";
+import Update from "../../components/update/Update";
 
 const Profile = () => {
+  const [openUpdate, setOpenUpdate] = useState(false);
   const { currentUser } = useContext(AuthContext);
   const username = useLocation().pathname.split("/")[2];
 
   const { isLoading, error, data } = useQuery(["user"], () =>
     makeRequest.get("/users/find/" + username).then((res) => {
       return res.data;
-    })  
+    })
   );
 
   const {
@@ -64,13 +66,20 @@ const Profile = () => {
         <>
           <div className="images">
             <img
-              src={data?.cover_pic ? data?.cover_pic : "/default-cover.jpeg"}
+              src={
+                data?.cover_pic && data?.cover_pic !== "/default-cover.jpeg"
+                  ? `/upload/${data?.cover_pic}`
+                  : "/default-cover.jpeg"
+              }
               alt=""
               className="cover-pic"
             />
             <img
               src={
-                data?.profile_pic ? data?.profile_pic : "/default-profile.jpeg"
+                data?.profile_pic &&
+                data?.profile_pic !== "/default-profile.jpeg"
+                  ? `/upload/${data?.profile_pic}`
+                  : "/default-profile.jpeg"
               }
               alt=""
               className="profile-pic"
@@ -105,10 +114,10 @@ const Profile = () => {
                     </span>
                   </div>
                 </div>
-                {followsError ? (
+                {followsLoading ? (
                   "Loading..."
                 ) : currentUser?.username === username ? (
-                  <button>Update</button>
+                  <button onClick={() => setOpenUpdate(true)}>Update</button>
                 ) : (
                   <button onClick={handleFollow}>
                     {followData?.includes(currentUser.username)
@@ -123,10 +132,10 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          <div className="posts"></div>
           <Posts username={username} />
         </>
       )}
+      {openUpdate && <Update setOpenUpdate={setOpenUpdate} user={data} />}
     </div>
   );
 };

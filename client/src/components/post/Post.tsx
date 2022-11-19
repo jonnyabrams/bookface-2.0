@@ -55,15 +55,20 @@ const Post = ({ post }: IProps) => {
       <div className="container">
         <div className="user">
           <div className="user-info">
-            <img
-              src={
-                post.profile_pic ? post.profile_pic : "/default-profile.jpeg"
-              }
-              alt=""
-            />
+            <Link to={`/profile/${post.username}`}>
+              <img
+                src={
+                  post.profile_pic
+                    ? `/upload/${post.profile_pic}`
+                    : "/default-profile.jpeg"
+                }
+                alt=""
+              />
+            </Link>
+
             <div className="details">
               <Link
-                to={`/profile/${post.user_id}`}
+                to={`/profile/${post.username}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <span className="name">{`${post.first_name} ${post.last_name}`}</span>
@@ -93,9 +98,7 @@ const Post = ({ post }: IProps) => {
             ) : (
               <FavoriteBorderOutlinedIcon onClick={handleLike} />
             )}
-            {data?.length === 1
-              ? "1 Like"
-              : data?.length + " Likes"}
+            {data?.length === 1 ? "1 Like" : data?.length + " Likes"}
           </div>
           <div className="item" onClick={() => setCommentsOpen(!commentsOpen)}>
             <TextsmsOutlinedIcon />
