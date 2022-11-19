@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 import { makeRequest } from "../../axios";
 import { UserType } from "../../typings";
@@ -79,43 +80,67 @@ const Update = ({ setOpenUpdate, user }: IProps) => {
 
   return (
     <div className="update">
-      Update Your Profile
-      <form>
-        <input type="file" onChange={(e) => setCoverPic(e.target.files![0])} />
-        <input type="file" onChange={(e) => setProfilePic(e.target.files![0])} />
-        <input
-          type="text"
-          name="first_name"
-          placeholder="First name"
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="last_name"
-          placeholder="Last name"
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="city"
-          placeholder="City"
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="website"
-          placeholder="Website"
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="password"
-          placeholder="Password"
-          onChange={handleChange}
-        />
-        <button onClick={handleSubmit}>Update</button>
-      </form>
-      <button onClick={() => setOpenUpdate(false)}>X</button>
+      <div className="wrapper">
+        <h1>Update Your Profile</h1>
+        <form>
+          <div className="files">
+            <label htmlFor="cover">
+              <span>Cover Picture</span>
+              <div className="img-container">
+                <img
+                  src={
+                    coverPic
+                      ? URL.createObjectURL(coverPic)
+                      : "/upload/" + user.cover_pic
+                  }
+                  alt=""
+                />
+                <CloudUploadIcon className="icon" />
+              </div>
+            </label>
+            <input
+              type="file"
+              id="cover"
+              style={{ display: "none" }}
+              onChange={(e) => setCoverPic(e.target.files![0])}
+            />
+            <label htmlFor="profile">
+              <span>Profile Picture</span>
+              <div className="img-container">
+                <img
+                  src={
+                    profilePic
+                      ? URL.createObjectURL(profilePic)
+                      : "/upload/" + user.profile_pic
+                  }
+                  alt=""
+                />
+                <CloudUploadIcon className="icon" />
+              </div>
+            </label>
+            <input
+              type="file"
+              id="profile"
+              style={{ display: "none" }}
+              onChange={(e) => setProfilePic(e.target.files![0])}
+            />
+          </div>
+          <label>First Name</label>
+          <input type="text" name="first_name" onChange={handleChange} />
+          <label>Last Name</label>
+          <input type="text" name="last_name" onChange={handleChange} />
+          <label>City</label>
+          <input type="text" name="city" onChange={handleChange} />
+          <label>Website</label>
+          <input type="text" name="website" onChange={handleChange} />
+          <label>Password</label>
+          <input type="text" name="password" onChange={handleChange} />
+          <button onClick={handleSubmit}>Update</button>
+        </form>
+        <button className="close" onClick={() => setOpenUpdate(false)}>
+          close
+        </button>
+      </div>
     </div>
   );
 };
