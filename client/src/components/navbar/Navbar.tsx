@@ -58,10 +58,15 @@ const Navbar = ({ darkMode, setDarkMode }: IProps) => {
         </Link>
         <EmailOutlinedIcon />
         <NotificationsOutlinedIcon />
-        <div className="user">
-          <img src="/default-profile.jpeg" alt="" />
-          <span>{`${currentUser.first_name} ${currentUser.last_name}`}</span>
-        </div>
+        <Link
+          style={{ textDecoration: "none", color: "inherit" }}
+          to={`/profile/${currentUser.username}`}
+        >
+          <div className="user">
+            <img src="/default-profile.jpeg" alt="" />
+            <span>{`${currentUser.first_name} ${currentUser.last_name}`}</span>
+          </div>
+        </Link>
       </div>
     </div>
   );

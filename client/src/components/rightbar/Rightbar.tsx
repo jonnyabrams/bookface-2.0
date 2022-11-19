@@ -1,33 +1,60 @@
+import { useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
+
+import { makeRequest } from "../../axios";
+import { AuthContext } from "../../context/authContext";
+import { UserType } from "../../typings";
 import "./rightbar.scss";
 
 const Rightbar = () => {
+  const { currentUser } = useContext(AuthContext);
+
+  const { data: allUsersData } = useQuery(["users"], () =>
+    makeRequest.get("/users/find/").then((res) => {
+      return res.data;
+    })
+  );
+
+  const {
+    isLoading: followsLoading,
+    error: followsError,
+    data: followData,
+  } = useQuery(["follow"], () =>
+    makeRequest
+      .get("/follows?followedUsername=" + currentUser?.username)
+      .then((res) => {
+        return res.data;
+      })
+  );
+
+  const notFollowing = allUsersData?.filter(
+    (user: UserType) =>
+      !followData?.includes(user.username) && user.id !== currentUser.id
+  );
+
   return (
     <div className="rightbar">
       <div className="container">
         <div className="item">
           <span>Suggestions For You</span>
-          <div className="user">
-            <div className="user-info">
-              <img src="/default-profile.jpeg" alt="" />
-              <span>Dwigt Rortugal</span>
-            </div>
 
-            <div className="buttons">
-              <button>Follow</button>
-              <button>Dismiss</button>
-            </div>
-          </div>
-          <div className="user">
-            <div className="user-info">
-              <img src="/default-profile.jpeg" alt="" />
-              <span>Dwigt Rortugal</span>
-            </div>
+          {notFollowing?.map((user: UserType) => (
+            <div key={user.id}>
+              <div className="user">
+                <div className="user-info">
+                  <img src={user.profile_pic ? "/upload/" + user.profile_pic : "/default-profile.jpeg"} alt="" />
+                  <span>
+                    {user.first_name} {user.last_name}
+                  </span>
+                </div>
 
-            <div className="buttons">
-              <button>Follow</button>
-              <button>Dismiss</button>
+                <div className="buttons">
+                  <button>Follow</button>
+                  <button>Dismiss</button>
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
 
         <div className="item">
