@@ -20,7 +20,7 @@ const Profile = () => {
   const { currentUser } = useContext(AuthContext);
   const username = useLocation().pathname.split("/")[2];
 
-  const { isLoading, error, data } = useQuery(["user"], () =>
+  const { isLoading, error, data } = useQuery(["user", username], () =>
     makeRequest.get("/users/find/" + username).then((res) => {
       return res.data;
     })
@@ -35,6 +35,8 @@ const Profile = () => {
       return res.data;
     })
   );
+
+  console.log(followData)
 
   const queryClient = useQueryClient();
 
