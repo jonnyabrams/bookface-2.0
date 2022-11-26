@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserType } from "../../typings";
 import "./user.scss";
 
 const User = ({ user }: { user: UserType }) => {
+  const navigate = useNavigate();
   return (
     <div className="user">
       <div className="user-info">
-        <Link to={`/profile/${user.username}`}>
         <img
           src={
             user.profile_pic
@@ -15,15 +15,15 @@ const User = ({ user }: { user: UserType }) => {
           }
           alt=""
         />
-        </Link>
         <span>
           {user.first_name} {user.last_name}
         </span>
       </div>
 
       <div className="buttons">
-        <button>Follow</button>
-        <button>Dismiss</button>
+        <button onClick={() => navigate(`/profile/${user.username}`)}>
+          View
+        </button>
       </div>
     </div>
   );

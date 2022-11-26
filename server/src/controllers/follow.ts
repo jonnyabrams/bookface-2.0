@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import db from "../connect";
 
+// gets all people following a user
 export const getFollows = async (req: Request, res: Response) => {
   try {
     const follows = await db.query(
@@ -11,11 +12,38 @@ export const getFollows = async (req: Request, res: Response) => {
     );
 
     // return just the usernames
-    res.status(200).json(follows.rows.map((follow) => follow.follower_username));
+    res
+      .status(200)
+      .json(follows.rows.map((follow) => follow.follower_username));
   } catch (error) {
     res.status(500).json(error);
     console.log(error);
   }
+};
+
+// gets all people current user is following
+export const getCurrentUserFollows = async (req: Request, res: Response) => {
+  const token = req.cookies.accessToken;
+  if (!token) return res.status(401).json("Not logged in!");
+
+  jwt.verify(token, "secretkey", async (err: any, userInfo: any) => {
+    if (err) return res.status(403).json("Token is not valid!");
+
+    try {
+      const follows = await db.query(
+        "SELECT followed_username FROM follows WHERE follower_username = $1",
+        [userInfo.username]
+      );
+
+      // return just the usernames
+      res
+        .status(200)
+        .json(follows.rows.map((follow) => follow.followed_username));
+    } catch (error) {
+      res.status(500).json(error);
+      console.log(error);
+    }
+  });
 };
 
 export const addFollow = async (req: Request, res: Response) => {

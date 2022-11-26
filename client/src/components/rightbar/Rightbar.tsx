@@ -17,12 +17,12 @@ const Rightbar = () => {
   );
 
   const {
-    isLoading: followsLoading,
-    error: followsError,
+    isLoading: followLoading,
+    error: followError,
     data: followData,
-  } = useQuery(["follow"], () =>
+  } = useQuery(["follows"], () =>
     makeRequest
-      .get("/follows?followedUsername=" + currentUser?.username)
+      .get("/follows/following")
       .then((res) => {
         return res.data;
       })

@@ -26,11 +26,12 @@ const Profile = () => {
     })
   );
 
+  // get usernames of all profile user's followers
   const {
     isLoading: followsLoading,
     error: followsError,
     data: followData,
-  } = useQuery(["follow"], () =>
+  } = useQuery(["follow", username], () =>
     makeRequest.get("/follows?followedUsername=" + username).then((res) => {
       return res.data;
     })
@@ -57,7 +58,7 @@ const Profile = () => {
   );
 
   const handleFollow = () => {
-    mutation.mutate(followData?.includes(currentUser.username));
+    mutation.mutate(followData?.includes(currentUser?.username));
   };
 
   return (
