@@ -96,10 +96,7 @@ const Post = ({ post }: IProps) => {
               </span>
             </div>
           </div>
-          <MoreHorizIcon
-            onClick={() => setMenuOpen(!menuOpen)}
-            style={{ cursor: "pointer" }}
-          />
+          <MoreHorizIcon onClick={() => setMenuOpen(!menuOpen)} />
           {menuOpen && post.user_id === currentUser.id && (
             <button onClick={handleDelete}>Delete</button>
           )}
