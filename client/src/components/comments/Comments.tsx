@@ -53,7 +53,7 @@ const Comments = ({ postId }: { postId: number }) => {
   return (
     <div className="comments">
       <div className="write">
-        <img src="/default-profile.jpeg" alt="" />
+        <img src={`/upload/${currentUser.profile_pic}`} alt="" />
         <input
           type="text"
           placeholder="Write a comment..."
