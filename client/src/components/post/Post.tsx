@@ -21,6 +21,7 @@ interface IProps {
 const Post = ({ post }: IProps) => {
   const { currentUser } = useContext(AuthContext);
   const [commentsOpen, setCommentsOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const { isLoading, error, data } = useQuery(["likes", post.id], () =>
     makeRequest.get("/likes?postId=" + post.id).then((res) => {
@@ -46,9 +47,26 @@ const Post = ({ post }: IProps) => {
     }
   );
 
+  const deleteMutation = useMutation(
+    (postId) => {
+      return makeRequest.delete(`/posts/${postId}`);
+    },
+    {
+      onSuccess: () => {
+        // Invalidate and refetch
+        queryClient.invalidateQueries(["posts"]);
+      },
+    }
+  );
+
   const handleLike = () => {
     mutation.mutate(data?.includes(currentUser.id));
   };
+
+  const handleDelete = () => {
+    // @ts-ignore
+    deleteMutation.mutate(post.id)
+  }
 
   return (
     <div className="post">
@@ -78,7 +96,8 @@ const Post = ({ post }: IProps) => {
               </span>
             </div>
           </div>
-          <MoreHorizIcon />
+          <MoreHorizIcon onClick={() => setMenuOpen(!menuOpen)} />
+          {menuOpen && <button onClick={handleDelete}>Delete</button> }
         </div>
 
         <div className="content">
