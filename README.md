@@ -6,6 +6,8 @@ profile and top of leftbar css
 
 ts ignores
 
+show number of comments instead of 'see comments'
+
 posts starting with 1 like (now not happening...?)
 
 TypeScript/Node setup: https://khalilstemmler.com/blogs/typescript/node-starter-project/

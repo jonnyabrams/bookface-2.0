@@ -31,6 +31,18 @@ const Comments = ({ postId }: { postId: number }) => {
     }
   );
 
+  const deleteMutation = useMutation(
+    (commentId) => {
+      return makeRequest.delete(`/comments/${commentId}`);
+    },
+    {
+      onSuccess: () => {
+        // Invalidate and refetch
+        queryClient.invalidateQueries(["comments"]);
+      },
+    }
+  );
+
   const handleClick = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     // @ts-ignore
@@ -62,9 +74,14 @@ const Comments = ({ postId }: { postId: number }) => {
                 }
                 alt=""
               />
-              <div className="delete">
+
+             {comment.user_id === currentUser.id && <div
+                className="delete"
+                // @ts-ignore
+                onClick={() => deleteMutation.mutate(comment.id)}
+              >
                 x
-              </div>
+              </div>}
               <div className="info">
                 <span>
                   {comment.first_name} {comment.last_name}

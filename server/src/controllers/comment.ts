@@ -40,3 +40,24 @@ export const addComment = async (req: Request, res: Response) => {
     }
   });
 };
+
+export const deleteComment = async (req: Request, res: Response) => {
+  const token = req.cookies.accessToken;
+  if (!token) return res.status(401).json("Not logged in!");
+
+  jwt.verify(token, "secretkey", async (err: any, userInfo: any) => {
+    if (err) return res.status(403).json("Token is not valid!");
+
+    try {
+      await db.query(
+        "DELETE FROM comments WHERE id = $1 AND user_id = $2",
+        [req.params.id, userInfo.id]
+      );
+
+      res.status(201).json("Comment has been deleted");
+    } catch (error) {
+      res.status(500).json(error);
+      console.log(error);
+    }
+  });
+};
