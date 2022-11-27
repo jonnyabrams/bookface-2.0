@@ -46,6 +46,16 @@
       display: flex;
       justify-content: space-between;
       gap: 20px;
+      position: relative;
+
+      .delete {
+        font-size: 13px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+        font-weight: bold;
+      }
 
       .info {
         flex: 5;

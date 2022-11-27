@@ -62,6 +62,9 @@ const Comments = ({ postId }: { postId: number }) => {
                 }
                 alt=""
               />
+              <div className="delete">
+                x
+              </div>
               <div className="info">
                 <span>
                   {comment.first_name} {comment.last_name}
