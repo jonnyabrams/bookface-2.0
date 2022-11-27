@@ -65,8 +65,8 @@ const Post = ({ post }: IProps) => {
 
   const handleDelete = () => {
     // @ts-ignore
-    deleteMutation.mutate(post.id)
-  }
+    deleteMutation.mutate(post.id);
+  };
 
   return (
     <div className="post">
@@ -96,8 +96,13 @@ const Post = ({ post }: IProps) => {
               </span>
             </div>
           </div>
-          <MoreHorizIcon onClick={() => setMenuOpen(!menuOpen)} />
-          {menuOpen && <button onClick={handleDelete}>Delete</button> }
+          <MoreHorizIcon
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{ cursor: "pointer" }}
+          />
+          {menuOpen && post.user_id === currentUser.id && (
+            <button onClick={handleDelete}>Delete</button>
+          )}
         </div>
 
         <div className="content">
