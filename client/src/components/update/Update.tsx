@@ -20,7 +20,6 @@ const Update = ({ setOpenUpdate, user }: IProps) => {
     last_name: user.last_name,
     city: user.city,
     website: user.website,
-    password: user.password,
   });
 
   const upload = async (file: File) => {
@@ -133,8 +132,6 @@ const Update = ({ setOpenUpdate, user }: IProps) => {
           <input type="text" name="city" onChange={handleChange} />
           <label>Website</label>
           <input type="text" name="website" onChange={handleChange} />
-          <label>Password</label>
-          <input type="text" name="password" onChange={handleChange} />
           <button onClick={handleSubmit}>Update</button>
         </form>
         <button className="close" onClick={() => setOpenUpdate(false)}>

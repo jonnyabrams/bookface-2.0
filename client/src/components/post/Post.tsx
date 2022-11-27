@@ -83,7 +83,7 @@ const Post = ({ post }: IProps) => {
 
         <div className="content">
           <p>{post.content}</p>
-          <img src={post.img && "./upload/" + post.img} alt="" />
+          <img src={post.img && "/upload/" + post.img} alt="" />
         </div>
 
         <div className="info">

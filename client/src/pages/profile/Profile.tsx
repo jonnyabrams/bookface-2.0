@@ -37,8 +37,6 @@ const Profile = () => {
     })
   );
 
-  console.log(followData)
-
   const queryClient = useQueryClient();
 
   const mutation = useMutation(

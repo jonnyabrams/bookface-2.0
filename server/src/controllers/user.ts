@@ -33,15 +33,6 @@ export const updateUser = async (req: Request, res: Response) => {
   const { first_name, last_name, city, website, profile_pic, cover_pic } =
     req.body;
 
-  if (req.body.password) {
-    try {
-      const salt = bcrypt.genSaltSync(10);
-      req.body.password = bcrypt.hashSync(req.body.password, salt);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in!");
 
@@ -50,7 +41,7 @@ export const updateUser = async (req: Request, res: Response) => {
 
     try {
       await db.query(
-        "UPDATE users SET first_name = $1, last_name = $2, city = $3, website = $4, cover_pic = $5, profile_pic = $6, password = $7 WHERE id = $8 returning *",
+        "UPDATE users SET first_name = $1, last_name = $2, city = $3, website = $4, cover_pic = $5, profile_pic = $6 WHERE id = $7 returning *",
         [
           first_name,
           last_name,
@@ -58,7 +49,6 @@ export const updateUser = async (req: Request, res: Response) => {
           website,
           cover_pic,
           profile_pic,
-          req.body.password,
           userInfo.id,
         ]
       );
