@@ -14,6 +14,7 @@ import Posts from "../../components/posts/Posts";
 import { makeRequest } from "../../axios";
 import { AuthContext } from "../../context/authContext";
 import Update from "../../components/update/Update";
+import Share from "../../components/share/Share";
 
 const Profile = () => {
   const [openUpdate, setOpenUpdate] = useState(false);
@@ -133,6 +134,7 @@ const Profile = () => {
               </div>
             </div>
           </div>
+          <Share />
           <Posts username={username} />
         </>
       )}
