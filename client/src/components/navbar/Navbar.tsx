@@ -63,7 +63,7 @@ const Navbar = ({ darkMode, setDarkMode }: IProps) => {
           to={`/profile/${currentUser.username}`}
         >
           <div className="user">
-            <img src="/default-profile.jpeg" alt="" />
+            <img src={`/upload/${currentUser.profile_pic}`} alt="" />
             <span>{`${currentUser.first_name} ${currentUser.last_name}`}</span>
           </div>
         </Link>
