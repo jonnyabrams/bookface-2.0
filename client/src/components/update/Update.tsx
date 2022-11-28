@@ -1,11 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 import { makeRequest } from "../../axios";
 import { UserType } from "../../typings";
 
 import "./update.scss";
+import { AuthContext } from "../../context/authContext";
 
 interface IProps {
   setOpenUpdate: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,6 +14,7 @@ interface IProps {
 }
 
 const Update = ({ setOpenUpdate, user }: IProps) => {
+  const { setCurrentUser } = useContext(AuthContext);
   const [coverPic, setCoverPic] = useState<File | null>(null);
   const [profilePic, setProfilePic] = useState<File | null>(null);
   const [inputs, setInputs] = useState({
@@ -48,6 +50,7 @@ const Update = ({ setOpenUpdate, user }: IProps) => {
       onSuccess: () => {
         // Invalidate and refetch
         queryClient.invalidateQueries(["user"]);
+        setCurrentUser({...user, ...inputs})
       },
     }
   );

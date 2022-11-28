@@ -41,8 +41,7 @@ const Profile = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
-    (following) => {
-      // @ts-ignore
+    (following: boolean) => {
       if (following) return makeRequest.delete("/follows?username=" + username);
       // if not liked...
       // @ts-ignore

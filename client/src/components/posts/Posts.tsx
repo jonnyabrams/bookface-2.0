@@ -12,8 +12,6 @@ const Posts = ({ username }: { username: string }) => {
     })
   );
 
-  console.log(data)
-
   return (
     <div className="posts">
       {error

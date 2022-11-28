@@ -1,11 +1,12 @@
 import axios from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext, SetStateAction, useEffect, useState } from "react";
 import { ILogin, UserType } from "../typings";
 
 interface IAuthContext {
   currentUser: UserType;
   login: (inputs: ILogin) => Promise<void>;
   logout: () => void;
+  setCurrentUser: React.Dispatch<SetStateAction<UserType>>
 }
 
 export const AuthContext = createContext({} as IAuthContext);
@@ -40,7 +41,7 @@ export const AuthContextProvider = ({
 
   return (
     // will be "cannot find namespace" error here unless you give this file a .tsx extension
-    <AuthContext.Provider value={{ login, logout, currentUser }}>
+    <AuthContext.Provider value={{ login, logout, currentUser, setCurrentUser }}>
       {children}
     </AuthContext.Provider>
   );

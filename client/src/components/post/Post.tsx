@@ -32,11 +32,9 @@ const Post = ({ post }: IProps) => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
-    (liked) => {
-      // @ts-ignore
+    (liked: boolean) => {
       if (liked) return makeRequest.delete("/likes?postId=" + post.id);
       // if not liked...
-      // @ts-ignore
       return makeRequest.post("/likes", { postId: post.id });
     },
     {
@@ -48,7 +46,7 @@ const Post = ({ post }: IProps) => {
   );
 
   const deleteMutation = useMutation(
-    (postId) => {
+    (postId: number) => {
       return makeRequest.delete(`/posts/${postId}`);
     },
     {
@@ -64,7 +62,7 @@ const Post = ({ post }: IProps) => {
   };
 
   const handleDelete = () => {
-    // @ts-ignore
+    
     deleteMutation.mutate(post.id);
   };
 
