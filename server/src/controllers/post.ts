@@ -18,7 +18,7 @@ export const getPosts = async (req: Request, res: Response) => {
     // return just user's posts if username in query (ie on profile), otherwise returns all user's posts + posts of those they follow (ie. home)
     const q = username
       ? "SELECT p.*, u.id AS user_id, first_name, last_name, profile_pic FROM posts AS p JOIN users AS u ON (u.username = p.username) WHERE p.username = $1 ORDER BY p.created_at DESC"
-      : `SELECT p.*, u.id AS user_id, first_name, last_name, profile_pic FROM posts AS p JOIN users AS u ON (u.id = p.user_id)
+      : `SELECT DISTINCT p.*, u.id AS user_id, first_name, last_name, profile_pic FROM posts AS p JOIN users AS u ON (u.id = p.user_id)
     LEFT JOIN follows AS f ON (p.username = f.followed_username) WHERE f.follower_username = $1 OR p.username = $1
     ORDER BY p.created_at DESC`;
 
