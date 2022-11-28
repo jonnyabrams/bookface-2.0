@@ -31,7 +31,7 @@ https://user-images.githubusercontent.com/97295867/204340988-d38976ec-c332-4d76-
 
 ---
 
-## Instructions For Use
+## Instructions For Use
 
 1. Clone this repo and go into the directory with `cd bookface-ts`
 2. Install frontend and backend dependencies with `npm i` in both the client and server folders
