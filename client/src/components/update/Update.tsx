@@ -13,6 +13,15 @@ interface IProps {
   user: UserType;
 }
 
+interface IUser {
+  profile_pic: any;
+  cover_pic: any;
+  first_name: string;
+  last_name: string;
+  city: string | undefined;
+  website: string | undefined;
+}
+
 const Update = ({ setOpenUpdate, user }: IProps) => {
   const { setCurrentUser } = useContext(AuthContext);
   const [coverPic, setCoverPic] = useState<File | null>(null);
@@ -43,14 +52,14 @@ const Update = ({ setOpenUpdate, user }: IProps) => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
-    (user) => {
+    (user: IUser) => {
       return makeRequest.put("/users", user);
     },
     {
       onSuccess: () => {
         // Invalidate and refetch
         queryClient.invalidateQueries(["user"]);
-        setCurrentUser({...user, ...inputs})
+        setCurrentUser({ ...user, ...inputs });
       },
     }
   );
@@ -71,7 +80,6 @@ const Update = ({ setOpenUpdate, user }: IProps) => {
       ? user.profile_pic
       : "/default-profile.jpeg";
 
-    // @ts-ignore
     mutation.mutate({
       ...inputs,
       profile_pic: profilePicUrl,

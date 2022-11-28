@@ -44,7 +44,6 @@ const Profile = () => {
     (following: boolean) => {
       if (following) return makeRequest.delete("/follows?username=" + username);
       // if not liked...
-      // @ts-ignore
       return makeRequest.post("/follows", { username });
     },
     {

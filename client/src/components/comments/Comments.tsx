@@ -7,6 +7,11 @@ import { AuthContext } from "../../context/authContext";
 import { CommentType } from "../../typings";
 import "./comments.scss";
 
+interface IComment {
+  content: string;
+  post_id: number;
+}
+
 const Comments = ({ postId }: { postId: number }) => {
   const { currentUser } = useContext(AuthContext);
   const [content, setContent] = useState("");
@@ -20,7 +25,7 @@ const Comments = ({ postId }: { postId: number }) => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
-    (newComment) => {
+    (newComment: IComment) => {
       return makeRequest.post("/comments", newComment);
     },
     {
@@ -45,7 +50,7 @@ const Comments = ({ postId }: { postId: number }) => {
 
   const handleClick = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    // @ts-ignore
+    
     mutation.mutate({ content, post_id: postId });
     setContent("");
   };

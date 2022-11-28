@@ -8,6 +8,11 @@ import Map from "../../assets/map.png";
 import Friend from "../../assets/friend.png";
 import "./share.scss";
 
+interface IPost {
+  content: string;
+  img: string;
+}
+
 const Share = () => {
   const { currentUser } = useContext(AuthContext);
   const [file, setFile] = useState<File | null>(null);
@@ -28,7 +33,7 @@ const Share = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
-    (newPost) => {
+    (newPost: IPost) => {
       return makeRequest.post("/posts", newPost);
     },
     {
@@ -43,7 +48,6 @@ const Share = () => {
     e.preventDefault();
     let imgUrl = "";
     if (file) imgUrl = await upload();
-    // @ts-ignore
     mutation.mutate({ content, img: imgUrl });
     setContent("");
     setFile(null);
