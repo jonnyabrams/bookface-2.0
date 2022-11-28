@@ -62,8 +62,8 @@ const Post = ({ post }: IProps) => {
   };
 
   const handleDelete = () => {
-    
     deleteMutation.mutate(post.id);
+    setMenuOpen(false);
   };
 
   return (
