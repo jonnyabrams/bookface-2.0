@@ -10,6 +10,8 @@ A user's profile displays only their own posts, while their home feed displays b
 
 This is a sequel to my previous [Bookface](https://github.com/jonnyabrams/bookface), which used the MERN stack (without TypeScript) and Redux for state management.
 
+With more time I would like to implement some of the non-functioning features such as the searchbar, the stories component and the 'Latest Activities' and 'Online Friends' sections.
+
 ---
 
 ## Video Demo
