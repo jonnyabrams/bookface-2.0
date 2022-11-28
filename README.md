@@ -1,5 +1,7 @@
 # Bookface 2.0
 
+<img width="1440" alt="bookface-2 0" src="https://user-images.githubusercontent.com/97295867/204341063-ed131a61-c85d-4b7f-b060-0ac92aa185fd.png">
+
 A Facebook clone using TypeScript and the PERN stack (PostgreSQL, Express, React, Node), with React Query/Context API for state management and Sass CSS.
 
 Users can sign up, sign in, customise their profile, post with optional images, follow other users, like and comment on their posts, delete posts/comments and sign out again.
@@ -12,6 +14,7 @@ This is a sequel to my previous [Bookface](https://github.com/jonnyabrams/bookfa
 
 ## Video Demo
 
+https://user-images.githubusercontent.com/97295867/204340988-d38976ec-c332-4d76-819e-d591b75225da.mp4
 
 ---
 
